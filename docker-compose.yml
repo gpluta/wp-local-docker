@@ -1,7 +1,7 @@
 version: '3'
 services:
-  mysql:
-    image: mysql:latest
+  mariadb:
+    image: mariadb:latest
     volumes:
       - "./data/db:/var/lib/mysql"
     restart: always
@@ -9,8 +9,8 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
+      MYSQL_DATABASE: wordpress_l
+      MYSQL_USER: wordpress_l
       MYSQL_PASSWORD: password
   mailcatcher:
      image: schickling/mailcatcher
@@ -36,7 +36,7 @@ services:
   phpfpm:
     image: 10up/phpfpm
     depends_on:
-      - mysql
+      - mariadb
       - memcached
       - elasticsearch
     volumes:
@@ -47,6 +47,9 @@ services:
     restart: always
     extra_hosts:
       - "docker-local.dev:172.18.0.1"
+    environment:
+      XDEBUG_CONFIG: remote_host= #your local machine ip goes here
+      PHP_IDE_CONFIG: serverName= #server name configured in your IDE
   nginx:
     depends_on:
       - phpfpm
@@ -63,7 +66,7 @@ services:
   wpsnapshots:
     build: images/wpsnapshots
     depends_on:
-      - mysql
+      - mariadb
       - phpfpm
     volumes:
       - "./config/wpsnapshots:/wpsnapshots"
