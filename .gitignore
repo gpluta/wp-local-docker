@@ -14,6 +14,8 @@ Thumbs.db
 nbproject/
 /tags
 .netbeans.xml
+logs/*
+!logs/.gitkeep
 
 # Compass/SASS/SCSS
 .sass-cache
@@ -27,18 +29,33 @@ sassdoc
 scss-lint-report.xml
 config.codekit
 
-/wordpress/*
-!/wordpress/.gitkeep
+## Wordpress config
+## The idea is to version as little as possible:
+## - a theme you are working on (mytheme)
+## - your custom plugins
 
+
+# This is the MariaDB data folder
 /data/*
 !/data/.gitkeep
 
-/logs/*
-!/logs/.gitkeep
+# Wordpress files
+wordpress/*
+!/wordpress/.gitkeep
 
-docker-compose.override.yml
+# Tune the rest to your needs...
 
-notes.md
-/config/elasticsearch/plugins/*
+!wordpress/wp-content/
 
-config/wpsnapshots/.wpsnapshots.json
+wordpress/wp-content/*
+!wordpress/wp-content/themes/
+!wordpress/wp-content/plugins/
+
+# Version only your theme...
+wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/natulu-theme
+
+# ...and your plugins
+wordpress/wp-content/plugins/*
+#!wordpress/wp-content/plugins/myplugin.php
+#!wordpress/wp-content/plugins/myplugin
