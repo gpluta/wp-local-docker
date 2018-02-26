@@ -56,8 +56,10 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@prettier/plugin-php": "github:prettier/plugin-php",
     "foundation-sites": "^6.4.3",
     "jquery": "^3.3.1",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.0",
+    "prettier": "github:prettier/prettier"
   }
 }
